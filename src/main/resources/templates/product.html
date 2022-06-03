@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons.flaticon.com/png/512/2821/premium/2821785.png?token=exp=1649001489~hmac=6e6ea5a705511a94e55bef0fa7366860">
+    <link rel="stylesheet" href="/css/button.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+
+<a th:href="@{/logout}">
+    <div id="cart1"  data-totalitems="0">
+        <i class='bx bxs-exit'></i>
+    </div>
+</a>
+
+<div th:switch="${user.getAppUserRole().name()}">
+    <div th:case="'USER'">
+        <a th:href="@{/coffix/cart}">
+            <div id="cart" class="cart" >
+                <i class='bx bxs-shopping-bag'></i>
+                <span class="cart-item" th:text="${quant}"></span>
+            </div>
+        </a>
+
+
+        <div th:each="product : ${list}">
+            <div class="container">
+                <div class="box">
+                    <div class="product-img">
+                        <img style="margin-left: 16px" th:src="${product.getPicture()}" width="250" alt="" />
+                    </div>
+                    <div class="product-info">
+                        <h1 th:text="${product.getName()}" >Fire Tablet</h1>
+                        <p class="price" th:text="${product.getPrice()} + ' soms'">$49.99</p>
+                        <p class="description" th:text="${product.getDescription()}">Powerful tablet at an incredible price.</p>
+                        Quantity:
+                        <input type="number" class="qty" required>
+                        <br /><br />
+                        <div class="page-wrapper">
+<!--                            <form th:action="@{/coffix/addtocart/{id} (id = ${product.getId()})}"   th:method="POST">-->
+<!--                                <button  type="submit" style="margin-bottom: 10px" id="addtocart">-->
+<!--                                    Add to Cart-->
+<!--                                    -->
+<!--                                </button>-->
+<!--                            </form>-->
+                            <form th:action="@{/coffix/addtocart/{id} (id = ${product.getId()})}"   th:method="POST">
+                                <button style="margin-bottom: 10px" type="submit" class="btn btn-warning">Add to Cart</button>
+                                <span class="cart-item"></span>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:case="'ADMIN'">
+        <a class="btn btn-dark" th:href="@{/coffix/addform}" role="button">Add Product</a>
+        <div th:each="product : ${list}">
+            <div class="container">
+                <div class="box">
+                    <div class="product-img">
+                        <img style="margin-left: 16px" th:src="${product.getPicture()}" width="250" alt="" />
+                    </div>
+                    <div class="product-info">
+                        <h1 th:text="${product.getName()}" >Fire Tablet</h1>
+                        <p class="price" th:text="${product.getPrice()} + ' soms'">$49.99</p>
+                        <p class="description" th:text="${product.getDescription()}">Powerful tablet at an incredible price.</p>
+                        Quantity:
+                        <input type="number" class="qty">
+                        <br /><br />
+                        <a th:href="@{/coffix/updateform/{id} (id = ${product.getId()})}" class="btn btn-success" role="button" style="float: left;" >Update</a>
+                        <form th:method="DELETE" th:action="@{/coffix/deleteproduct/{id} (id = ${product.getId()})}">
+                            <input class="btn btn-danger" type="submit" value="Remove" style="float: left;">
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+</body>
+</html>

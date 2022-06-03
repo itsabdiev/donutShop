@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <link rel="stylesheet" href="/css/button.css" />
+    <meta charset="UTF-8">
+    <title>My Cart</title>
+</head>
+<body>
+<form th:action="@{/coffix}"   th:method="GET">
+    <button style="margin-bottom: 10px" type="submit" class="btn btn-warning">Add more</button>
+</form>
+
+    <div th:switch="${cart.isEmpty()}">
+        <div th:case="false">
+            <form th:action="@{/coffix/order}"   th:method="GET">
+                <button style="margin-bottom: 10px" type="submit" class="btn btn-warning">Order</button>
+            </form>
+            <div th:each="product : ${cart}">
+                <div class="container">
+                    <div class="box">
+                        <div class="product-img">
+                            <img style="margin-left: 16px" th:src="${product.getPicture()}" width="250" alt="" />
+                        </div>
+                        <div class="product-info">
+                            <h1 th:text="${product.getName()}" >Fire Tablet</h1>
+                            <p class="price" th:text="${product.getPrice()} + ' soms'">$49.99</p>
+                            <p class="description" th:text="${product.getDescription()}">Powerful tablet at an incredible price.</p>
+                            Quantity:
+                            <input type="number" class="qty" required>
+                            <br /><br />
+                            <div class="page-wrapper">
+                                <!--                            <form th:action="@{/coffix/addtocart/{id} (id = ${product.getId()})}"   th:method="POST">-->
+                                <!--                                <button  type="submit" style="margin-bottom: 10px" id="addtocart">-->
+                                <!--                                    Add to Cart-->
+                                <!--                                    -->
+                                <!--                                </button>-->
+                                <!--                            </form>-->
+                                <form th:action="@{/coffix/removecart/{id} (id = ${product.getId()})}"   th:method="POST">
+                                    <button style="margin-bottom: 10px" type="submit" class="btn btn-warning">Remove</button>
+                                    <span class="cart-item"></span>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:case="true">
+            <p style="background-color:#a1ec1b;color: red;margin-left: 300px;margin-right: 300px">There is nothing in your cart</p>
+        </div>
+    </div>
+    <br>
+
+</body>
+</html>

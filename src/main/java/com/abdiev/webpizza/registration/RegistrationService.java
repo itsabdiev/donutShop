@@ -40,7 +40,7 @@ public class RegistrationService {
                 )
         );
 
-        String link = "http://localhost:8080/confirm?token=" + token;
+        String link = "https://donutty.herokuapp.com//confirm?token=" + token;
         emailSender.send(
                 request.getEmail(),
                 buildEmail(request.getFirstName(), link));

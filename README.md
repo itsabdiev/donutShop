@@ -2,7 +2,7 @@
 
 ### Link to Website
 
-[Click : MY WEBSITE](https://springcoffeedonutshop.herokuapp.com/main) <br>
+[Click : MY WEBSITE](https://donutty.herokuapp.com/) <br>
 
 ### Pages
 

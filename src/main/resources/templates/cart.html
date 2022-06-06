@@ -35,7 +35,7 @@
                                 <!--                                    -->
                                 <!--                                </button>-->
                                 <!--                            </form>-->
-                                <form th:action="@{/coffix/removecart/{id} (id = ${product.getId()})}"   th:method="POST">
+                                <form th:action="@{/coffix/removecart/{id} (id = ${product.getId()})}"   th:method="DELETE">
                                     <button style="margin-bottom: 10px" type="submit" class="btn btn-warning">Remove</button>
                                     <span class="cart-item"></span>
                                 </form>
